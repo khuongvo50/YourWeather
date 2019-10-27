@@ -296,7 +296,7 @@
                             android:layout_width="6dp"
                             android:layout_height="60dp"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/wind" />
+                            app:srcCompat="@drawable/giooi" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -337,7 +337,7 @@
                             android:layout_width="9dp"
                             android:layout_height="60dp"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/pressure" />
+                            app:srcCompat="@drawable/indicator" />
                     </LinearLayout>
 
                     <LinearLayout
