@@ -146,8 +146,8 @@
 
                             <ImageView
                                 android:id="@+id/imageIcon"
-                                android:layout_width="125dp"
-                                android:layout_height="59dp" />
+                                android:layout_width="match_parent"
+                                android:layout_height="62dp" />
 
                             <TextView
                                 android:id="@+id/textviewStatus"
