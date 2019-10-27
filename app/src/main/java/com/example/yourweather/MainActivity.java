@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void GetGPS5DayWeather() {
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        String url = "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&units=metric&appid=fd6c4d0476b4fd11ea44e47d7a7fb4af\n";
+        String url = "http://http://api.openweathermap.org/data/2.5/find?lat="+latitude+"&lon="+longitude+"&cnt=5&appid=fd6c4d0476b4fd11ea44e47d7a7fb4af\n";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
