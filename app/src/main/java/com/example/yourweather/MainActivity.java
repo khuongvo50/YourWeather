@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
                             long l = Long.valueOf(day);
                             java.util.Date date = new Date(l * 1000L);
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd HH-mm-ss");
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy MM dd HH-mm-ss");
                             String Day = simpleDateFormat.format(date);
                             txtDay.setText(Day);
 
