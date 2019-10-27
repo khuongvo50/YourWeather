@@ -153,14 +153,13 @@ public class MainActivity extends AppCompatActivity {
 
                             JSONObject jsonObject = new JSONObject(response);
 
-
                             String day = jsonObject.getString("dt");
                             String name = jsonObject.getString("name");
                             txtName.setText(name);
 
                             long l = Long.valueOf(day);
                             java.util.Date date = new Date(l * 1000L);
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd HH-mm-ss");
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd HH-mm-ss");
                             String Day = simpleDateFormat.format(date);
                             txtDay.setText(Day);
 
@@ -174,19 +173,22 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObjectMain = jsonObject.getJSONObject("main");
                             String nhietdo = jsonObjectMain.getString("temp");
                             String doam = jsonObjectMain.getString("humidity");
+                            String apxuat = jsonObjectMain.getString("pressure");
 
                             Double chuyenkiu = Double.valueOf(nhietdo);
                             String Nhietdo = String.valueOf(chuyenkiu.intValue());
-                            txtTemp.setText(Nhietdo+" C");
+                            txtTemp.setText(Nhietdo+"°C");
                             txtHumidity.setText(String.format("%s %%", doam));
+                            txtgrnd_level.setText(apxuat+" hPa");
 
                             JSONObject jsonObjectWind = jsonObject.getJSONObject("wind");
                             String gio = jsonObjectWind.getString("speed");
                             txtWind.setText(gio+" m/s");
 
+
                             JSONObject jsonObjectCloud = jsonObject.getJSONObject("clouds");
                             String may = jsonObjectCloud.getString("all");
-                            txtCloud.setText(may);
+                            txtCloud.setText(may+" %");
 
                             JSONObject jsonObjectSYS = jsonObject.getJSONObject("sys");
                             String country = jsonObjectSYS.getString("country");
@@ -222,7 +224,75 @@ public class MainActivity extends AppCompatActivity {
 
                             long l = Long.valueOf(day);
                             java.util.Date date = new Date(l * 1000L);
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy MM dd HH-mm-ss");
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd HH-mm-ss");
+                            String Day = simpleDateFormat.format(date);
+                            txtDay.setText(Day);
+
+                            JSONArray jsonArray = jsonObject.getJSONArray("weather");
+                            JSONObject jsonObjectweather = jsonArray.getJSONObject(0);
+                            String status = jsonObjectweather.getString("main");
+                            String icon = jsonObjectweather.getString("icon");
+                            Picasso.with(MainActivity.this).load("http://openweathermap.org/img/w/" + icon + ".png").into(imgIcon);
+                            txtStatus.setText(status);
+
+                            JSONObject jsonObjectMain = jsonObject.getJSONObject("main");
+                            String nhietdo = jsonObjectMain.getString("temp");
+                            String doam = jsonObjectMain.getString("humidity");
+                            String apxuat = jsonObjectMain.getString("pressure");
+
+                            Double chuyenkiu = Double.valueOf(nhietdo);
+                            String Nhietdo = String.valueOf(chuyenkiu.intValue());
+                            txtTemp.setText(Nhietdo+"°C");
+                            txtHumidity.setText(String.format("%s %%", doam));
+                            txtgrnd_level.setText(apxuat+" hPa");
+
+                            JSONObject jsonObjectWind = jsonObject.getJSONObject("wind");
+                            String gio = jsonObjectWind.getString("speed");
+                            txtWind.setText(gio+" m/s");
+
+
+                            JSONObject jsonObjectCloud = jsonObject.getJSONObject("clouds");
+                            String may = jsonObjectCloud.getString("all");
+                            txtCloud.setText(may+" %");
+
+                            JSONObject jsonObjectSYS = jsonObject.getJSONObject("sys");
+                            String country = jsonObjectSYS.getString("country");
+                            txtCountry.setText(country);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        requestQueue.add(stringRequest);
+    }
+
+
+
+    public void GetGPS5DayWeather() {
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        String url = "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&units=metric&appid=fd6c4d0476b4fd11ea44e47d7a7fb4af\n";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            String day = jsonObject.getString("dt");
+                            String name = jsonObject.getString("name");
+                            txtName.setText(name);
+
+                            long l = Long.valueOf(day);
+                            java.util.Date date = new Date(l * 1000L);
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd HH-mm-ss");
                             String Day = simpleDateFormat.format(date);
                             txtDay.setText(Day);
 
