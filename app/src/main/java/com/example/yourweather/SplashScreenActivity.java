@@ -17,7 +17,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         EasySplashScreen config = new EasySplashScreen(SplashScreenActivity.this)
                 .withFullScreen()
                 .withTargetActivity(MainActivity.class)
-                .withSplashTimeOut(2500)
+                .withSplashTimeOut(1500)
                 .withLogo(R.drawable.loading);
 
         View view = config.create();

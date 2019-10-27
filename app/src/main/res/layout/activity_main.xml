@@ -11,6 +11,7 @@
 
 
     <LinearLayout
+        android:id="@+id/timkiem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -22,7 +23,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="City , State"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@color/colorText" />
 
         <Button
             android:id="@+id/buttonSearch"
@@ -44,31 +46,34 @@
         android:id="@+id/textviewDay"
         android:layout_width="match_parent"
         android:layout_height="47dp"
-
         android:text="Ngay Cap Nhat"
+
+        android:textColor="@color/colorText"
         android:textSize="24sp" />
 
     <LinearLayout
+        android:id="@+id/nhietdo"
         android:layout_width="match_parent"
-        android:layout_height="235dp"
-        android:background="@drawable/botron"
+        android:layout_height="wrap_content"
 
+        android:background="@drawable/botron"
         android:orientation="vertical"
         android:paddingTop="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="317dp"
+            android:layout_height="135dp"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ThanhPho"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
@@ -77,6 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="SAIGON"
+                        android:textColor="@color/colorText"
                         android:textSize="24sp" />
 
                     <TextView
@@ -85,53 +91,70 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="VN"
+                        android:textColor="@color/colorText"
                         android:textSize="24sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/NhietDo"
                 android:layout_width="match_parent"
-                android:layout_height="255dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="257dp">
+                    android:layout_width="378dp"
+                    android:layout_height="match_parent">
 
                     <LinearLayout
-                        android:layout_width="212dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="236dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textviewTemp"
-                            android:layout_width="match_parent"
-                            android:layout_height="255dp"
-                            android:text="Nhiet Độ"
-                            android:textSize="69sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="159dp"
-                        android:layout_height="150dp"
-                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="64dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/temp" />
+
+                            <TextView
+                                android:id="@+id/textviewTemp"
+                                android:layout_width="173dp"
+                                android:layout_height="wrap_content"
+                                android:text="00oC"
+                                android:textColor="@color/colorText"
+                                android:textSize="69sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="126dp"
+                        android:layout_height="87dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="89dp"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/imageIcon"
-                                android:layout_width="134dp"
-                                android:layout_height="116dp" />
+                                android:layout_width="125dp"
+                                android:layout_height="59dp" />
 
                             <TextView
                                 android:id="@+id/textviewStatus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Cloud"
+                                android:textColor="@color/colorText"
                                 android:textSize="18sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -143,17 +166,15 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="235dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:background="@color/botronchitiet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Weather Detail"
-            android:textSize="18sp" />
+    <LinearLayout
+        android:id="@+id/chitiet"
+        android:layout_width="match_parent"
+        android:layout_height="171dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/Ln_white"
@@ -170,7 +191,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="89dp"
+                    android:layout_height="78dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -214,7 +235,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="77dp"
                     android:orientation="horizontal">
 
 

@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Double chuyenkiu = Double.valueOf(nhietdo);
                             String Nhietdo = String.valueOf(chuyenkiu.intValue());
-                            txtTemp.setText(Nhietdo+" C");
+                            txtTemp.setText(Nhietdo+"°C");
                             txtHumidity.setText(String.format("%s %%", doam));
                             txtgrnd_level.setText(apxuat+" hPa");
 
@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
                             JSONObject jsonObjectCloud = jsonObject.getJSONObject("clouds");
                             String may = jsonObjectCloud.getString("all");
-                            txtCloud.setText(may);
+                            txtCloud.setText(may+" %");
 
                             JSONObject jsonObjectSYS = jsonObject.getJSONObject("sys");
                             String country = jsonObjectSYS.getString("country");
