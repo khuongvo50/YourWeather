@@ -45,7 +45,7 @@
     <TextView
         android:id="@+id/textviewDay"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="wrap_content"
         android:text="Ngay Cap Nhat"
 
         android:textColor="@color/colorText"
@@ -54,7 +54,7 @@
     <LinearLayout
         android:id="@+id/nhietdo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="133dp"
 
         android:background="@drawable/botron"
         android:orientation="vertical"
@@ -148,7 +148,7 @@
                             <ImageView
                                 android:id="@+id/imageIcon"
                                 android:layout_width="match_parent"
-                                android:layout_height="62dp" />
+                                android:layout_height="57dp" />
 
                             <TextView
                                 android:id="@+id/textviewStatus"
@@ -174,7 +174,7 @@
     <LinearLayout
         android:id="@+id/chitiet"
         android:layout_width="match_parent"
-        android:layout_height="171dp"
+        android:layout_height="152dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -185,7 +185,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="205dp"
+                android:layout_width="194dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
@@ -226,8 +226,8 @@
                             android:id="@+id/textviewCloud"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorText"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:textColor="@color/colorText" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -267,8 +267,8 @@
                             android:id="@+id/textviewhumidity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorText"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:textColor="@color/colorText" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -293,8 +293,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="6dp"
-                            android:layout_height="60dp"
+                            android:layout_width="2dp"
+                            android:layout_height="59dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/giooi" />
                     </LinearLayout>
@@ -316,33 +316,33 @@
                             android:id="@+id/textviewWind"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorText"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:textColor="@color/colorText" />
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="74dp"
+                    android:layout_height="63dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="9dp"
-                            android:layout_height="60dp"
+                            android:layout_height="59dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/indicator" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="60dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -356,9 +356,8 @@
                         <TextView
                             android:id="@+id/txtgrnd"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorText"
-                            android:layout_weight="1" />
+                            android:layout_height="34dp"
+                            android:textColor="@color/colorText" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -366,17 +365,27 @@
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
     <LinearLayout
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="215dp"
         android:background="@drawable/botron"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="192dp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dử liệu được cung cấp bởi openweathermap.org" />
 
 </LinearLayout>

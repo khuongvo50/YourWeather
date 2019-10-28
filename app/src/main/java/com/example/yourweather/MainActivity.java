@@ -12,6 +12,7 @@ import android.os.Bundle;
 
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -37,15 +39,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText editSearch;
-    private Button btnSearch, btnChangeActivity, bt_gps;
+    private Button btnSearch, bt_gps;
     private TextView txtName, txtCountry, txtTemp, txtStatus,
-            txtHumidity, txtCloud, txtWind, txtDay,txtgrnd_level;
-    private ImageView imgIcon;
+            txtHumidity, txtCloud, txtWind, txtDay,txtgrnd_level,txtNome;
+    private ImageView imgIcon,imageback;
+    ListView lv;
+    CustomAdapter customAdapter;
+    ArrayList<ThoiTiet> magThoiTiet;
 
     private FusedLocationProviderClient client;
     String latitude,longitude;
@@ -60,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         requestPermission();
         gpsSeach();
         getLonLat();
+        //GetGPS5DayWeather();
 
 
         client = LocationServices.getFusedLocationProviderClient(this);
@@ -77,16 +84,26 @@ public class MainActivity extends AppCompatActivity {
                             longitude = String.valueOf(lon);
 
                             GetGPSCurrentWeather();
+                            GetGPSSevenDayWeather();
                         }
                     }
                 });
+
+
+
+//                Button bton = findViewById(R.id.bton);
+//                bton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        GetGPSSevenDayWeather();
+//                    }
+//                });
 
 
     }
     private void mapping() {
         editSearch = findViewById(R.id.edittextSearch);
         btnSearch = findViewById(R.id.buttonSearch);
-        btnChangeActivity = findViewById(R.id.buttonChangeActivity);
         txtName = findViewById(R.id.textviewName);
         txtCountry = findViewById(R.id.textViewCountry);
         txtTemp = findViewById(R.id.textviewTemp);
@@ -98,8 +115,16 @@ public class MainActivity extends AppCompatActivity {
         imgIcon = findViewById(R.id.imageIcon);
         txtgrnd_level = findViewById(R.id.txtgrnd);
 
+
+        imageback = findViewById(R.id.imageviewBack);
+        lv = findViewById(R.id.listview);
+        magThoiTiet = new ArrayList<ThoiTiet>();
+        customAdapter = new CustomAdapter(MainActivity.this,magThoiTiet);
+        lv.setAdapter(customAdapter);
+
         // get lon lat 3g or wifi.....................
         bt_gps = findViewById(R.id.getLocation);
+
 
     }
     private void requestPermission(){
@@ -129,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getLonLat();
                 GetGPSCurrentWeather();
+                GetGPSSevenDayWeather();
 
             }
         });
@@ -179,16 +205,16 @@ public class MainActivity extends AppCompatActivity {
                             String Nhietdo = String.valueOf(chuyenkiu.intValue());
                             txtTemp.setText(Nhietdo+"°C");
                             txtHumidity.setText(String.format("%s %%", doam));
-                            txtgrnd_level.setText(apxuat+" hPa");
+                            txtgrnd_level.setText(apxuat+"hPa");
 
                             JSONObject jsonObjectWind = jsonObject.getJSONObject("wind");
                             String gio = jsonObjectWind.getString("speed");
-                            txtWind.setText(gio+" m/s");
+                            txtWind.setText(gio+"m/s");
 
 
                             JSONObject jsonObjectCloud = jsonObject.getJSONObject("clouds");
                             String may = jsonObjectCloud.getString("all");
-                            txtCloud.setText(may+" %");
+                            txtCloud.setText(may+"%");
 
                             JSONObject jsonObjectSYS = jsonObject.getJSONObject("sys");
                             String country = jsonObjectSYS.getString("country");
@@ -275,61 +301,57 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void GetGPS5DayWeather() {
+
+
+
+
+    public void GetGPSSevenDayWeather() {
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        String url = "http://http://api.openweathermap.org/data/2.5/find?lat="+latitude+"&lon="+longitude+"&cnt=5&appid=fd6c4d0476b4fd11ea44e47d7a7fb4af\n";
+        String url = "http://api.openweathermap.org/data/2.5/forecast/daily?lat="+latitude+"&lon="+longitude+"&units=metric&cnt=7&appid=53fbf527d52d4d773e828243b90c1f8e";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("Ketqua","Json"+response);
                         try {
 
                             JSONObject jsonObject = new JSONObject(response);
 
-                            String day = jsonObject.getString("dt");
-                            String name = jsonObject.getString("name");
-                            txtName.setText(name);
+                            JSONArray jsonArrayList = jsonObject.getJSONArray("list");
+                            for (int i=0;i<jsonArrayList.length();i++){
+                                JSONObject jsonObjectList = jsonArrayList.getJSONObject(i);
 
-                            long l = Long.valueOf(day);
-                            java.util.Date date = new Date(l * 1000L);
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd HH-mm-ss");
-                            String Day = simpleDateFormat.format(date);
-                            txtDay.setText(Day);
+                                String ngay = jsonObjectList.getString("dt");
+                                long l = Long.valueOf(ngay);
+                                java.util.Date date = new Date(l * 1000L);
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd");
+                                String Day = simpleDateFormat.format(date);
 
-                            JSONArray jsonArray = jsonObject.getJSONArray("weather");
-                            JSONObject jsonObjectweather = jsonArray.getJSONObject(0);
-                            String status = jsonObjectweather.getString("main");
-                            String icon = jsonObjectweather.getString("icon");
-                            Picasso.with(MainActivity.this).load("http://openweathermap.org/img/w/" + icon + ".png").into(imgIcon);
-                            txtStatus.setText(status);
+//                                JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("main");
+//                                String max = jsonObjectTemp.getString("temp_max");
+//                                String min = jsonObjectTemp.getString("temp_min");
 
-                            JSONObject jsonObjectMain = jsonObject.getJSONObject("main");
-                            String nhietdo = jsonObjectMain.getString("temp");
-                            String doam = jsonObjectMain.getString("humidity");
-                            String apxuat = jsonObjectMain.getString("pressure");
+                                JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
+                                String max = jsonObjectTemp.getString("max");
+                                String min = jsonObjectTemp.getString("min");
+                                Double a = Double.valueOf(max);
+                                Double b = Double.valueOf(min);
+                                String NhietdoMax = String.valueOf(a.intValue());
+                                String NhietdoMin = String.valueOf(b.intValue());
 
-                            Double chuyenkiu = Double.valueOf(nhietdo);
-                            String Nhietdo = String.valueOf(chuyenkiu.intValue());
-                            txtTemp.setText(Nhietdo+"°C");
-                            txtHumidity.setText(String.format("%s %%", doam));
-                            txtgrnd_level.setText(apxuat+" hPa");
+                                JSONArray jsonArrayWeather = jsonObjectList.getJSONArray("weather");
+                                JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
+                                String status = jsonObjectWeather.getString("description");
+                                String icon = jsonObjectWeather.getString("icon");
 
-                            JSONObject jsonObjectWind = jsonObject.getJSONObject("wind");
-                            String gio = jsonObjectWind.getString("speed");
-                            txtWind.setText(gio+" m/s");
-
-
-                            JSONObject jsonObjectCloud = jsonObject.getJSONObject("clouds");
-                            String may = jsonObjectCloud.getString("all");
-                            txtCloud.setText(may+" %");
-
-                            JSONObject jsonObjectSYS = jsonObject.getJSONObject("sys");
-                            String country = jsonObjectSYS.getString("country");
-                            txtCountry.setText(country);
+                                magThoiTiet.add(new ThoiTiet(Day,status,icon,NhietdoMax,NhietdoMin));
+                            }
+                            customAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
                 },
                 new Response.ErrorListener() {

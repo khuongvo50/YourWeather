@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YourWeather</string>
+    <string name="app_name">Your Weather</string>
 
     <string name="title_activity_loading">loading</string>
     <string name="dummy_button">Dummy Button</string>
