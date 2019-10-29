@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/ss"
+    android:background="@drawable/backround"
     tools:context=".MainActivity">
 
 
@@ -14,6 +14,7 @@
         android:id="@+id/timkiem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/botronbuton"
         android:orientation="horizontal">
 
         <EditText
@@ -24,21 +25,26 @@
             android:ems="10"
             android:hint="City , State"
             android:inputType="textPersonName"
-            android:textColor="@color/colorText" />
+            android:textColor="@color/colorText"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/buttonSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Search" />
+            android:background="@drawable/botronbuton"
+            android:text="Search"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/getLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Gps" />
+            android:background="@drawable/botronbuton"
+            android:text="Gps"
+            android:textStyle="italic" />
 
     </LinearLayout>
 
@@ -46,15 +52,14 @@
         android:id="@+id/textviewDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ngay Cap Nhat"
-
+        android:gravity="center"
         android:textColor="@color/colorText"
-        android:textSize="24sp" />
+        android:textSize="15sp" />
 
     <LinearLayout
         android:id="@+id/nhietdo"
         android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_height="125dp"
 
         android:background="@drawable/botron"
         android:orientation="vertical"
@@ -62,7 +67,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:layout_height="120dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -81,7 +86,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="SAIGON"
                         android:textColor="@color/colorText"
                         android:textSize="24sp" />
 
@@ -90,7 +94,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="VN"
                         android:textColor="@color/colorText"
                         android:textSize="24sp" />
                 </LinearLayout>
@@ -127,9 +130,9 @@
                                 android:id="@+id/textviewTemp"
                                 android:layout_width="173dp"
                                 android:layout_height="wrap_content"
-                                android:text="0oC"
                                 android:textColor="@color/colorText"
-                                android:textSize="69sp" />
+                                android:textSize="69sp"
+                                android:textStyle="normal" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -154,7 +157,6 @@
                                 android:id="@+id/textviewStatus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Cloud"
                                 android:textColor="@color/colorText"
                                 android:textSize="18sp" />
                         </LinearLayout>
@@ -169,18 +171,18 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="5dp" />
+        android:layout_height="2dp" />
 
     <LinearLayout
         android:id="@+id/chitiet"
         android:layout_width="match_parent"
-        android:layout_height="152dp"
+        android:layout_height="163dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/Ln_white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/botron"
             android:orientation="horizontal">
 
@@ -334,9 +336,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="9dp"
-                            android:layout_height="59dp"
-                            android:layout_weight="1"
+                            android:layout_width="85dp"
+                            android:layout_height="48dp"
                             app:srcCompat="@drawable/indicator" />
                     </LinearLayout>
 
@@ -367,25 +368,28 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="5dp" />
+        android:layout_height="2dp" />
 
     <LinearLayout
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="215dp"
+        android:layout_height="222dp"
         android:background="@drawable/botron"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="192dp" />
+            android:layout_height="206dp" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dử liệu được cung cấp bởi openweathermap.org" />
+        android:gravity="center"
+        android:text="Dử liệu được cung cấp bởi openweathermap.org"
+        android:textColor="#000A09"
+        android:textSize="10sp"
+        android:textStyle="italic" />
 
 </LinearLayout>

@@ -50,8 +50,8 @@ public class CustomAdapter extends BaseAdapter {
 
         txtDay.setText(thoiTiet.day);
         txtStatus.setText(thoiTiet.status);
-        txtMaxTemp.setText(thoiTiet.maxTemp+"C");
-        txtMinTemp.setText(thoiTiet.minTemp+"C");
+        txtMaxTemp.setText(thoiTiet.maxTemp+"°C");
+        txtMinTemp.setText(thoiTiet.minTemp+"°C");
 
         Picasso.with(context).load("http://openweathermap.org/img/w/" + thoiTiet.image + ".png").into(ImgStatus);
         return view;

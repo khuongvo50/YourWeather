@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import gr.net.maroulis.library.EasySplashScreen;
 
@@ -21,7 +19,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 .withLogo(R.drawable.loading);
 
         View view = config.create();
-
         setContentView(view);
 
     }
