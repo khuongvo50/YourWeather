@@ -28,6 +28,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -148,12 +149,22 @@ public class MainActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editSearch.getText().toString().isEmpty()){
-                    return;
-                }
                 String city = editSearch.getText().toString();
-                GetCurrentWeatherSearch(city);
-                GetSevenDayWeatherSearch(city);
+                if(editSearch.getText().toString().isEmpty()){
+                     Toast.makeText(MainActivity.this,"Dữ liệu nhập không có",Toast.LENGTH_LONG).show();
+                }else {
+
+
+                    GetCurrentWeatherSearch(city);
+
+                    GetSevenDayWeatherSearch(city);
+
+
+
+
+
+                }
+
             }
         });
     }
@@ -167,52 +178,58 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-
                             JSONObject jsonObject = new JSONObject(response);
 
-                            String day = jsonObject.getString("dt");
-                            String name = jsonObject.getString("name");
-                            txtName.setText(name);
+                            Log.d("Ketqua","Json"+response);
+                               // Toast.makeText(MainActivity.this,"Dữ liệu trả về không co!!!",Toast.LENGTH_LONG).show();
 
-                            long l = Long.valueOf(day);
-                            java.util.Date date = new Date(l * 1000L);
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd");
-                            String Day = simpleDateFormat.format(date);
-                            txtDay.setText(Day);
+                                String day = jsonObject.getString("dt");
+                                String name = jsonObject.getString("name");
+                                txtName.setText(name);
 
-                            JSONArray jsonArray = jsonObject.getJSONArray("weather");
-                            JSONObject jsonObjectweather = jsonArray.getJSONObject(0);
-                            String status = jsonObjectweather.getString("main");
-                            String icon = jsonObjectweather.getString("icon");
-                            Picasso.with(MainActivity.this).load("http://openweathermap.org/img/w/" + icon + ".png").into(imgIcon);
-                            txtStatus.setText(status);
+                                long l = Long.valueOf(day);
+                                java.util.Date date = new Date(l * 1000L);
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE dd/MM/yyyy");
+                                String Day = simpleDateFormat.format(date);
+                                txtDay.setText(Day);
 
-                            JSONObject jsonObjectMain = jsonObject.getJSONObject("main");
-                            String nhietdo = jsonObjectMain.getString("temp");
-                            String doam = jsonObjectMain.getString("humidity");
-                            String apxuat = jsonObjectMain.getString("pressure");
+                                JSONArray jsonArray = jsonObject.getJSONArray("weather");
+                                JSONObject jsonObjectweather = jsonArray.getJSONObject(0);
+                                String status = jsonObjectweather.getString("main");
+                                String icon = jsonObjectweather.getString("icon");
+                                Picasso.with(MainActivity.this).load("http://openweathermap.org/img/w/" + icon + ".png").into(imgIcon);
+                                txtStatus.setText(status);
 
-                            Double chuyenkiu = Double.valueOf(nhietdo);
-                            String Nhietdo = String.valueOf(chuyenkiu.intValue());
-                            txtTemp.setText(Nhietdo+"°C");
-                            txtHumidity.setText(String.format("%s %%", doam));
-                            txtgrnd_level.setText(apxuat+"hPa");
+                                JSONObject jsonObjectMain = jsonObject.getJSONObject("main");
+                                String nhietdo = jsonObjectMain.getString("temp");
+                                String doam = jsonObjectMain.getString("humidity");
+                                String apxuat = jsonObjectMain.getString("pressure");
 
-                            JSONObject jsonObjectWind = jsonObject.getJSONObject("wind");
-                            String gio = jsonObjectWind.getString("speed");
-                            txtWind.setText(gio+"m/s");
+                                Double chuyenkiu = Double.valueOf(nhietdo);
+                                String Nhietdo = String.valueOf(chuyenkiu.intValue());
+                                txtTemp.setText(Nhietdo+"°C");
+                                txtHumidity.setText(String.format("%s %%", doam));
+                                txtgrnd_level.setText(apxuat+"hPa");
+
+                                JSONObject jsonObjectWind = jsonObject.getJSONObject("wind");
+                                String gio = jsonObjectWind.getString("speed");
+                                txtWind.setText(gio+"m/s");
 
 
-                            JSONObject jsonObjectCloud = jsonObject.getJSONObject("clouds");
-                            String may = jsonObjectCloud.getString("all");
-                            txtCloud.setText(may+" %");
+                                JSONObject jsonObjectCloud = jsonObject.getJSONObject("clouds");
+                                String may = jsonObjectCloud.getString("all");
+                                txtCloud.setText(may+" %");
 
-                            JSONObject jsonObjectSYS = jsonObject.getJSONObject("sys");
-                            String country = jsonObjectSYS.getString("country");
-                            txtCountry.setText(country);
+                                JSONObject jsonObjectSYS = jsonObject.getJSONObject("sys");
+                                String country = jsonObjectSYS.getString("country");
+                                txtCountry.setText(country);
+
+
+
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Toast.makeText(MainActivity.this,"Dữ liệu trả về không co!!!",Toast.LENGTH_LONG).show();
+
                         }
                     }
                 },
@@ -243,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                                 String ngay = jsonObjectList.getString("dt");
                                 long l = Long.valueOf(ngay);
                                 java.util.Date date = new Date(l * 1000L);
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd");
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE EEEE dd/MM/yyyy");
                                 String Day = simpleDateFormat.format(date);
 
                                 JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
@@ -264,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
                             customAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Toast.makeText(MainActivity.this,"Dữ liệu trả về không co!!!",Toast.LENGTH_LONG).show();
                         }
                     }
                 },
@@ -292,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
 
                             long l = Long.valueOf(day);
                             java.util.Date date = new Date(l * 1000L);
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd");
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE EEEE dd/MM/yyyy");
                             String Day = simpleDateFormat.format(date);
                             txtDay.setText(Day);
 
@@ -328,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                             txtCountry.setText(country);
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Toast.makeText(MainActivity.this,"Dữ liệu trả về không co!!!",Toast.LENGTH_LONG).show();
                         }
                     }
                 },
@@ -359,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
                                 String ngay = jsonObjectList.getString("dt");
                                 long l = Long.valueOf(ngay);
                                 java.util.Date date = new Date(l * 1000L);
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd");
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE EEEE dd/MM/yyyy");
                                 String Day = simpleDateFormat.format(date);
 
                                 JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
@@ -380,7 +397,7 @@ public class MainActivity extends AppCompatActivity {
                             customAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Toast.makeText(MainActivity.this,"Dữ liệu trả về không co!!!",Toast.LENGTH_LONG).show();
                         }
 
                     }
